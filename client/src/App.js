@@ -1,17 +1,13 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
+    <div className="container">
+      <div className="main">
+        <h1 className="m-4">Splopple Music</h1>
+        <p className="m-2">Giving the people what they want: Spotify and Apple Music Harmony.</p>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
     </div>
   );
 }

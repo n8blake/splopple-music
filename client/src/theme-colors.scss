@@ -1,0 +1,37 @@
+/* Change theme colors here... */
+/*$theme-colors:(
+	"primary": #0074d9,
+	"secondary":#A58E5D,
+	"danger":#ff4136,
+	"warning":#DD8D00,
+	"success":#65BA7D,
+	"info":#BFD7DD,
+	"dark":#4f3f1e
+);*/
+
+/* Change other colors here if needed */
+/*
+$colors: (
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "white": $white,
+  "gray": $gray-600,
+  "gray-dark": $gray-800
+) !default;
+
+*/
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
