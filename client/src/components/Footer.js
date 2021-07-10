@@ -3,8 +3,9 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <div>
-            <h1>Footer</h1>
+        <div class='text-center'>
+            <h4>Splopple Music</h4>
+            <p>Giving the people what they want: Spotify and Apple Music Harmony.</p>
         </div>
     )
 }
