@@ -1,10 +1,12 @@
 import React from 'react';
+import LogoSVG from './logo.svg';
+import './logo.scss';
 
 function Logo() {
     //do logo stuff
 
     return (
-        <div>Logo!</div>
+        <img class="logo-default" alt="logo" src={LogoSVG}/>
     )
 
 }
