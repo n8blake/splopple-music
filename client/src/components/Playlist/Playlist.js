@@ -1,25 +1,59 @@
-import React from 'react';
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import React, { useEffect, useState } from 'react';
+import PlaylistItem from '../PlaylistItem/PlaylistItem';
+import InputURI from '../InputURI/InputURI';
+import { useStoreContext } from "../../utils/GlobalState";
+import useDebounce from "../../utils/DebounceHook";
+import { QUERY_APPLE_URI, UPDATE_LIST_RESULTS, QUERY_SPOTIFY_URI, LOADING } from '../../utils/actions';
+import API from "../../utils/API";
 import './Playlist.scss';
 
 export default function Playlist() {
+
+    const [state, dispatch] = useStoreContext();
+    const [listURI, setListURI] = useState("");
+    const debouncedInputURI = useDebounce(listURI, 500);
+
+    useEffect(() => {
+        // if there is nothing searched...
+        if(!listURI){
+            dispatch({
+                type: QUERY_APPLE_URI,
+                inputURI: ""
+            });
+            dispatch({
+                type: UPDATE_LIST_RESULTS,
+                searchResults: state.playlist
+            });
+            return;
+        }
+
+        if(debouncedInputURI){
+            // set global search term
+            dispatch({
+                type: QUERY_APPLE_URI,
+                URI: debouncedInputURI
+            });
+            //console.log(`Starting search...`);
+            API.queryAppleMusicURI(state.listURI)
+                .then(results => {
+                    //console.log("Searched!");
+                    console.log(results.status);
+                    if(results.data){
+                        dispatch({
+                            type: UPDATE_LIST_RESULTS,
+                            results: results.data
+                        });
+                    }
+                    
+                });
+
+        }
+    }, [debouncedInputURI, dispatch, listURI, state.playlist, state.listURI]);
+
     return (
         <div>
-            <div class="m-2 input-group input-group-sm mb-3">
-                <input type="text" class="rounded-pill border-secondary text-center form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='input playlist url'/>
-            </div>
-            
-            <div class="card h-50 d-inline-block">
-                <ul class="list-group list-group-flush h-50 d-inline-block">
-                    <li class="list-group-item row-md-2 d-flex flex-row"><div class='d-inline-flex flex-row text-center'><img src='https://static.billboard.com/files/media/denzel-curry-clout-cobain-2018-billboard-1548-compressed.jpg' class="img-fluid rounded-start w-25 m-2" alt="..."/><div class='d-flex flex-column text-center'><h5 class=" text-center d-flex card-title flex-column">Denzel Curry</h5><p class="text-center d-flex card-text flex-column">Clout Cobain</p></div></div></li>
-                    <li class="list-group-item row-md-2 d-flex flex-row"><div class='d-inline-flex flex-row text-center'><img src='https://static.billboard.com/files/media/denzel-curry-clout-cobain-2018-billboard-1548-compressed.jpg' class="img-fluid rounded-start w-25 m-2" alt="..."/><div class='d-flex flex-column text-center'><h5 class=" text-center d-flex card-title flex-column">Denzel Curry</h5><p class="text-center d-flex card-text flex-column">Clout Cobain</p></div></div></li>
-                    <li class="list-group-item row-md-2 d-flex flex-row"><div class='d-inline-flex flex-row text-center'><img src='https://static.billboard.com/files/media/denzel-curry-clout-cobain-2018-billboard-1548-compressed.jpg' class="img-fluid rounded-start w-25 m-2" alt="..."/><div class='d-flex flex-column text-center'><h5 class=" text-center d-flex card-title flex-column">Denzel Curry</h5><p class="text-center d-flex card-text flex-column">Clout Cobain</p></div></div></li>
-                </ul>
-            </div>
-            <div class="m-2 input-group input-group-sm mb-3">
-                <input type="text" class="rounded-pill border-secondary text-center form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='generated playlist url'/>
-                <FileCopyOutlinedIcon/>
-            </div>
+            <InputURI />
+            <ul>Playlist!</ul>
         </div>
     )
 }
