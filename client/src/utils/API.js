@@ -6,7 +6,22 @@ export default {
     queryAppleMusicURI: function(URI){ 
         //console.log(`Getting ${queryString}`)
         const appleMusicEndPoint = '/api/AppleMusic/';
-        return axios.post(appleMusicEndPoint, URI);
+        //return axios.post(appleMusicEndPoint, URI);
+        const testData = [
+            {artist: 'Lady Gaga', song: 'Bad Romance'},
+            {artist: 'Beyoncé', song: 'All the Single Ladies'},
+            {artist: 'Shakira', song: 'Hips don\'t Lie'}
+        ]
+        const testPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const response = {};
+              response.data = testData;
+              response.status = 'ok';
+              response.code = 200;
+              resolve(response);
+            }, 300);
+          });
+        return testPromise;
     },
     querySpotifyURI: function(URI){ 
         //console.log(`Getting ${queryString}`)
