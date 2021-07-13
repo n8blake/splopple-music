@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./App.scss";
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Playlist from './components/Playlist';
+import Playlist from './components/Playlist/Playlist';
 import Home from './components/Home';
-import Login from './components/Login'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './components/Login/Login'
+
 import {
   BrowserRouter as Router,
   Switch,
