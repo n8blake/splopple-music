@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 
 export default function Playlist() {
