@@ -1,5 +1,6 @@
 import React from 'react';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import './Playlist.scss';
 
 export default function Playlist() {
     return (
