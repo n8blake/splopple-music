@@ -1,0 +1,13 @@
+@import '../../theme-colors.scss';
+
+.playlist {
+    text-align: left;
+}
+
+.album-art {
+    width: 64pt;
+    height: 64pt;
+    margin-right: 10pt;
+    background-color: $red;
+    border-radius: 4pt;
+}

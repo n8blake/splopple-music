@@ -18,8 +18,9 @@ export default {
               response.data = testData;
               response.status = 'ok';
               response.code = 200;
+              //console.log('responding...');
               resolve(response);
-            }, 300);
+            }, 500);
           });
         return testPromise;
     },

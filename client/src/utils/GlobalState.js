@@ -43,7 +43,6 @@ const reducer = (state, action) => {
 
 const StoreProvider = ({value = [], ...props}) => {
     const [state, dispatch] = useReducer(reducer, {
-        playlist: [],
         inputURI: "",
         inputURIType: 'Apple',
         inputListResults: [],

@@ -13,6 +13,11 @@ export default function Playlist() {
     const [listURI, setListURI] = useState("");
     const debouncedInputURI = useDebounce(listURI, 500);
 
+    const handleInputChange = event => {
+        //const uri = event.target.value;
+        setListURI(event.target.value);
+    }
+
     useEffect(() => {
         // if there is nothing searched...
         if(!listURI){
@@ -22,7 +27,7 @@ export default function Playlist() {
             });
             dispatch({
                 type: UPDATE_LIST_RESULTS,
-                searchResults: state.playlist
+                searchResults: state.inputListResults
             });
             return;
         }
@@ -36,8 +41,8 @@ export default function Playlist() {
             //console.log(`Starting search...`);
             API.queryAppleMusicURI(state.listURI)
                 .then(results => {
-                    //console.log("Searched!");
-                    console.log(results.status);
+                    //console.log("Queried!");
+                    //console.log(results.status);
                     if(results.data){
                         dispatch({
                             type: UPDATE_LIST_RESULTS,
@@ -48,12 +53,33 @@ export default function Playlist() {
                 });
 
         }
-    }, [debouncedInputURI, dispatch, listURI, state.playlist, state.listURI]);
+    }, [debouncedInputURI, dispatch, listURI, state.inputListResults, state.listURI]);
 
     return (
         <div>
-            <InputURI />
-            <ul>Playlist!</ul>
+            <InputURI onChange={handleInputChange} />
+            <ul className="list-group playlist">
+                {
+                    state.inputListResults ? (
+                        state.inputListResults.map(listItem => {
+                            return(
+                            <li className="list-group-item">
+                                <div className="d-flex justify-content-left">
+                                    <div className="album-art"></div>
+                                    <div>
+                                        <strong>{listItem.song}</strong>
+                                        <p>{listItem.artist}</p>
+                                    </div>
+                                </div>
+                            </li>)
+                        })
+                    ) : (
+                        <li className="list-group-item">
+                            <small className="text-muted">no results</small>
+                        </li>
+                    )
+                }
+            </ul>
         </div>
     )
 }
