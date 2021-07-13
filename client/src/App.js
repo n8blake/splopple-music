@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.scss";
 import Footer from './components/Footer';
-import Header from './components/Header';
-import Playlist from './components/Playlist';
-import Home from './components/Home';
-import Login from './components/Login'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header/Header';
+import Playlist from './components/Playlist/Playlist';
+import Login from './components/Login/Login';
+import { StoreProvider } from './utils/GlobalState';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,31 +15,22 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <StoreProvider>
       <Router>
-      <Header/>
-      <div class=' text-center h-100 row align-items-center justify-content-center'>
-        
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/Login">
-            <Login />
-          </Route>
-          <Route path="/Playlist">
-            <Playlist />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-      
-      
+        <Header/>
+        <div className=' text-center h-100 row align-items-center justify-content-center'>
+          <Switch>
+            <Route exact path="/Login">
+              <Login />
+            </Route>
+            <Route exact path="/">
+              <Playlist />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
       <Footer/>
-    </div>
+      </StoreProvider>
   );
 }
 

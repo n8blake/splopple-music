@@ -1,0 +1,28 @@
+@import '../../theme-colors.scss';
+
+.input-wrapper {
+    display: flex;
+    flex: 1;
+    padding: 6pt 15pt 6pt 6pt;
+    margin: 0pt 6pt 10pt 6pt;
+    border: solid;
+    border-color: $secondary;
+    border-width: 1pt;
+    border-radius: 24pt;
+}
+
+input {
+    background-color: white;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    color: black;
+    border: none;
+    font-size: 18pt;
+}
+
+input:focus {
+    border: none;
+    background-color: white;
+    outline: none !important;
+}

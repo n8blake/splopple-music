@@ -6,7 +6,7 @@ function Logo() {
     //do logo stuff
 
     return (
-        <img class="logo-default" alt="logo" src={LogoSVG}/>
+        <img className="logo-default" alt="logo" src={LogoSVG}/>
     )
 
 }
