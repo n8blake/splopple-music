@@ -4,7 +4,7 @@ import Logo from './logo/logo';
 
 export default function Header() {
     return (
-        <div class='text-center'>
+        <div class='text-center'>            
             <Logo />
             <nav>
             <ul class="nav navbar-light bg-light justify-content-center">
