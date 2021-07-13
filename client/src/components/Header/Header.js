@@ -6,6 +6,10 @@ export default function Header() {
     return (
         <div class='text-center'>            
             <Logo />
+            <div>
+              <h1>Splopple Music</h1>
+              <p>Giving the people what they want: Spotify and Apple Music Harmony.</p>
+            </div>
             <nav>
             <ul class="nav navbar-light bg-light justify-content-center">
               <li class="nav-item m-2">
