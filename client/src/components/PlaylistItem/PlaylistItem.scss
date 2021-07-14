@@ -1,0 +1,24 @@
+@import '../../theme-colors.scss';
+
+.conflict {
+    background-color: tint($danger, 80);
+}
+
+.playlist-item {
+    padding: 0pt;
+}
+
+.conflict-action-container {
+    width: 100%;
+    text-align: center;
+}
+
+.conflict-notification {
+    margin: auto;
+    margin-top: 10pt;
+    margin-bottom: 5pt;
+}
+
+.conflict-list {
+    padding-left: 20pt;
+}

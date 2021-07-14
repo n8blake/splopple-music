@@ -56,22 +56,15 @@ export default function Playlist() {
     }, [debouncedInputURI, dispatch, listURI, state.inputListResults, state.listURI]);
 
     return (
-        <div>
+        <div className="container">
             <InputURI onChange={handleInputChange} />
             <ul className="list-group playlist">
                 {
                     state.inputListResults ? (
-                        state.inputListResults.map(listItem => {
+                        state.inputListResults.map((listItem, index) => {
                             return(
-                            <li className="list-group-item">
-                                <div className="d-flex justify-content-left">
-                                    <div className="album-art"></div>
-                                    <div>
-                                        <strong>{listItem.song}</strong>
-                                        <p>{listItem.artist}</p>
-                                    </div>
-                                </div>
-                            </li>)
+                                <PlaylistItem key={index} data={listItem} />
+                            )
                         })
                     ) : (
                         <li className="list-group-item">
