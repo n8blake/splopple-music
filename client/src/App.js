@@ -18,7 +18,7 @@ function App() {
     <StoreProvider>
       <Router>
         <Header/>
-        <div className=' text-center h-100 row align-items-center justify-content-center'>
+        <div >
           <Switch>
             <Route exact path="/Login">
               <Login />
