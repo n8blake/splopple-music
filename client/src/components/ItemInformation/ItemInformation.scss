@@ -1,0 +1,13 @@
+@import '../../theme-colors.scss';
+
+.album-art {
+    width: 64pt;
+    height: 64pt;
+    margin-right: 10pt;
+    background-color: $red;
+    border-radius: 4pt;
+}
+
+.information-item {
+    padding-left: 20pt;
+}
