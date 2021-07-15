@@ -5,6 +5,8 @@ import './Header.scss';
 
 export default function Header() {
 
+    const showNav = false;
+
     return (
         <div className='text-center'>            
             <Logo />
@@ -12,17 +14,20 @@ export default function Header() {
               <h1>Splopple Music</h1>
               <p>Giving the people what they want: Spotify and Apple Music Harmony.</p>
             </div>
-            <nav>
-            <ul className="nav justify-content-center">
-              <li className="nav-item m-2">
-                <Link to="/Login">Log in</Link>
-              </li>
-              <li className="nav-item m-2">
-                <Link to="/">Playlist</Link>
-              </li>
-              
-            </ul>
-        </nav>
+            { showNav ? (
+              <nav>
+                <ul className="nav justify-content-center">
+                  <li className="nav-item m-2">
+                    <Link to="/Login">Log in</Link>
+                  </li>
+                  <li className="nav-item m-2">
+                    <Link to="/">Playlist</Link>
+                  </li>
+                </ul>
+              </nav> 
+            ) : (
+              <span></span>
+            )}
         </div>
     )
 }
