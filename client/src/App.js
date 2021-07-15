@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.scss";
-import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Playlist from './components/Playlist/Playlist';
 import Login from './components/Login/Login';
@@ -29,7 +28,6 @@ function App() {
           </Switch>
         </div>
       </Router>
-      <Footer/>
       </StoreProvider>
   );
 }
