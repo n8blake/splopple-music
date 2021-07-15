@@ -75,6 +75,22 @@ export default function Playlist() {
                     )
                 }
             </ul>
+            {
+                (state.inputListResults && state.inputListResults.spotifyPlaylistURI) ? 
+                ( 
+                    <a href={state.inputListResults.spotifyPlaylistURI} target="_blank" className="btn btn-lg btn-outline-success spotify-uri-button">Open In Spotify</a>
+                ) : (
+                    <span></span>
+                )
+            }
+            {
+                (state.inputListResults && state.inputListResults.appleMusicPlaylistURI) ? 
+                ( 
+                    <a href={state.inputListResults.appleMusicPlaylistURI} target="_blank" className="btn btn-lg btn-outline-info spotify-uri-button">Open In Apple Music</a>
+                ) : (
+                    <span></span>
+                )
+            }
         </div>
     )
 }
