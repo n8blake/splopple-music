@@ -1,6 +1,6 @@
 {
-  "appleMusicPlaylistURI":"appleMusic.play.list",
-  "spotifyPlaylistURI":"spotify.play.list",
+  "appleMusicPlaylistURI":"https://music.apple.com/us/playlist/songs-of-our-generation/pl.u-m4PPtYmxm9",
+  "spotifyPlaylistURI":"https://open.spotify.com/playlist/1p1m03Ogf3XHorhDkBYS1b?si=65d3fde0b4484347",
   "tracks":[
   {
     "artists": ["Lady Gaga"],
@@ -12,7 +12,9 @@
         "dimension": "64",
         "url": "https://upload.wikimedia.org/wikipedia/en/c/cc/Lady_Gaga_-_Bad_Romance.png"
       }
-    ]
+    ],
+    "appleTrackId": "apple.track.id",
+    "spotifyTrackId": "spotify.track.id"
   },
   {
     "artists": ["Lady Gaga", "Beyoncé"],
@@ -24,7 +26,9 @@
         "dimension": "64",
         "url": "https://images-na.ssl-images-amazon.com/images/I/71Pu0evk6eL._SL1095_.jpg"
       }
-    ]
+    ],
+    "appleTrackId": "apple.track.id",
+    "spotifyTrackId": "spotify.track.id"
   },
   {
     "artists": ["Beyoncé"],
@@ -36,7 +40,9 @@
         "dimension": "64",
         "url": "https://images-na.ssl-images-amazon.com/images/I/71Pu0evk6eL._SL1095_.jpg"
       }
-    ]
+    ],
+    "appleTrackId": "apple.track.id",
+    "spotifyTrackId": "spotify.track.id"
   },
   {
     "artists": ["Shakira", "Wyclef Jean"],
@@ -48,7 +54,9 @@
         "dimension": "64",
         "url": "https://images-na.ssl-images-amazon.com/images/I/71zZNCwkGNL._SL1500_.jpg"
       }
-    ]
+    ],
+    "appleTrackId": "apple.track.id",
+    "spotifyTrackId": "spotify.track.id"
   }
 ]
 }

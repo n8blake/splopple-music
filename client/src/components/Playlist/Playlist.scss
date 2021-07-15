@@ -6,9 +6,17 @@
 
 .playlist-container {
     margin-top: 20pt;
+    margin-bottom: 20pt;
+    padding: 20pt;
 }
 
 .no-results {
     text-align: center;
+    width: 100%;
+}
+
+.spotify-uri-button {
+    margin-top: 20pt;
+    border-radius: 24pt;
     width: 100%;
 }

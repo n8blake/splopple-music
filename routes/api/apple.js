@@ -3,8 +3,7 @@ const appleMusicAPIController = require("../../api_controllers/appleMusicAPICont
 
 // Match with '/api/apple'
 router.route("/")
-    //.get(bookController.findAll)
-    .post(appleMusicAPIController.fetch);
+    .post(appleMusicAPIController.fetchPlaylist);
 
 // Matches with '/api/apple/:id'
 // Is this even useful?
