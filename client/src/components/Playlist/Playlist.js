@@ -14,8 +14,6 @@ export default function Playlist() {
     const debouncedInputURI = useDebounce(listURI, 500);
 
     const handleInputChange = event => {
-        //const uri = event.target.value;
-        //console.log(event.target.value);
         setListURI(event.target.value);
     }
 
@@ -24,7 +22,7 @@ export default function Playlist() {
         if(!listURI){
             dispatch({
                 type: QUERY_APPLE_URI,
-                inputURI: state.inputURI
+                inputURI: ""
             });
             dispatch({
                 type: UPDATE_LIST_RESULTS,
@@ -33,7 +31,7 @@ export default function Playlist() {
             return;
         }
 
-        if(debouncedInputURI){
+        if(debouncedInputURI && (debouncedInputURI != state.inputURI)){
             // set global search term
             dispatch({
                 type: QUERY_APPLE_URI,
@@ -48,7 +46,7 @@ export default function Playlist() {
                     //console.log("Queried!");
                     //console.log(results.status);
                     if(results.data){
-                        console.log(results.data);
+                        //console.log(results.data);
                         dispatch({
                             type: UPDATE_LIST_RESULTS,
                             results: results.data
@@ -64,8 +62,8 @@ export default function Playlist() {
             <InputURI onChange={handleInputChange} />
             <ul className="list-group playlist">
                 {
-                    state.inputListResults ? (
-                        state.inputListResults.map((listItem, index) => {
+                    (state.inputListResults && state.inputListResults.tracks) ? (
+                        state.inputListResults.tracks.map((listItem, index) => {
                             return(
                                 <PlaylistItem key={index} data={listItem} />
                             )
