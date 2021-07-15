@@ -1,6 +1,6 @@
 {
-  "appleMusicPlaylistURI":"appleMusic.play.list",
-  "spotifyPlaylistURI":"spotify.play.list",
+  "appleMusicPlaylistURI":"https://music.apple.com/us/playlist/songs-of-our-generation/pl.u-m4PPtYmxm9",
+  "spotifyPlaylistURI":"https://open.spotify.com/playlist/1p1m03Ogf3XHorhDkBYS1b?si=65d3fde0b4484347",
   "tracks":[
   {
     "artists": ["Lady Gaga"],
