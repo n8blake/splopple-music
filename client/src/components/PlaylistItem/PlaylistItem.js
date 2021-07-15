@@ -1,46 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import ItemInformation from '../ItemInformation/ItemInformation'
+import React from 'react'
 import './PlaylistItem.scss'
 
 function PlaylistItem(props) {
-    
-    const [conflict, setConflic] = useState(false);
-    const [listItemClass, setListItemClass] = useState("list-group-item playlist-item")
-
-    useEffect(()=>{
-        if(props.data.conflict) {
-            setListItemClass("list-group-item playlist-item conflict")
-        }
-    }, [props.data.conflict])
 
     return (
-        <li className={listItemClass}>
-            {props.data.conflict ? (
-                // conflic action component
+        <li className="list-group-item playlist-item">
+            <div className="d-flex justify-content-right">
                 <div>
-                <div className="conflict-action-container">
-                    <div className="badge rounded-pill bg-danger conflict-notification">Conflict!</div>
-                    <p className="text-danger">Select one of the songs to resolve.</p>
+                    <img className="album-art" alt="" src={""} /> 
                 </div>
-                <ul className="list-group-flush conflict-list">
-                    
-                    {props.data.songs.map((song, index) => {
-                        return(
-                            <ItemInformation conflict={true} key={index} item={song} />
-                        )
-                    })}
-                </ul>
+                <div>
+                    <strong>{props.data.trackName}</strong>
+                    <p>{""}</p>
                 </div>
-            ) : (
-                <ul className="list-group-flush conflict-list">
-                {props.data.songs.map((song, index) => {
-                    return(
-                        <ItemInformation conflict={false} key={index} item={song} />
-                    )
-                })}
-                </ul>
-            )}
-
+            </div>
         </li>
     )
 }

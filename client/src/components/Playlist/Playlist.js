@@ -15,6 +15,7 @@ export default function Playlist() {
 
     const handleInputChange = event => {
         //const uri = event.target.value;
+        //console.log(event.target.value);
         setListURI(event.target.value);
     }
 
@@ -23,7 +24,7 @@ export default function Playlist() {
         if(!listURI){
             dispatch({
                 type: QUERY_APPLE_URI,
-                inputURI: ""
+                inputURI: state.inputURI
             });
             dispatch({
                 type: UPDATE_LIST_RESULTS,
@@ -38,25 +39,28 @@ export default function Playlist() {
                 type: QUERY_APPLE_URI,
                 URI: debouncedInputURI
             });
+
+            //validate URI here...
+
             //console.log(`Starting search...`);
-            API.queryAppleMusicURI(state.listURI)
+            API.queryAppleMusicURI(state.inputURI)
                 .then(results => {
                     //console.log("Queried!");
                     //console.log(results.status);
                     if(results.data){
+                        console.log(results.data);
                         dispatch({
                             type: UPDATE_LIST_RESULTS,
                             results: results.data
                         });
                     }
-                    
                 });
 
         }
-    }, [debouncedInputURI, dispatch, listURI, state.inputListResults, state.listURI]);
+    }, [debouncedInputURI, dispatch, listURI, state.inputListResults, state.inputURI]);
 
     return (
-        <div className="container">
+        <div className="container playlist-container">
             <InputURI onChange={handleInputChange} />
             <ul className="list-group playlist">
                 {
@@ -67,9 +71,7 @@ export default function Playlist() {
                             )
                         })
                     ) : (
-                        <li className="list-group-item">
-                            <small className="text-muted">no results</small>
-                        </li>
+                        <i className="text-muted no-results">no results</i>  
                     )
                 }
             </ul>
