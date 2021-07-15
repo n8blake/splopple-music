@@ -1,5 +1,11 @@
 module.exports = { 
-    fetch: function(request, response) {
-        // ???
+    getToken(){
+
+    }
+    // fetchTracks: function async(req, res) {
+      
+    // }
+    getTracks(){
+        
     }
 }
