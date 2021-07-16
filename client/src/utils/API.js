@@ -6,11 +6,15 @@ export default {
     queryAppleMusicURI: function(URI){ 
         //console.log(`Getting ${URI}`)
         const appleMusicEndPoint = '/api/apple/';
+        const testEndPoint = '/api/test/';
         const request = {
             playlist_uri: URI
         }
         //console.log(request);
-        return axios.post(appleMusicEndPoint, request);
+        if(process.env.NODE_ENV === "production"){
+            return axios.post(appleMusicEndPoint, request);
+        } 
+        return axios.post(testEndPoint, request);
     },
     querySpotifyURI: function(URI){ 
         //console.log(`Getting ${queryString}`)
