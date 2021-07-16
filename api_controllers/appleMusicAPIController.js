@@ -36,13 +36,12 @@ module.exports = {
             newTrack.appleTrackId = checkTrack.id;
             prunedTracks.push(newTrack);
         }
-        const playlistStub = {
-            applePlaylistId: incomingPlaylistURI,
-            spotifyPlaylistId: "",
+        let playlistStub = {
+            applePlaylistURL: request.body.playlist_uri,
+            spotifyPlaylistURL: "",
             tracks: prunedTracks
         }
-        const matchedTracks = await spotifyAPIController.fetchTracks(prunedTracks);
-        console.log(matchedTracks)
-        response.json(matchedTracks);
+        let internalPlaylist = await spotifyAPIController.fetchTracks(playlistStub);
+        response.json(internalPlaylist);
     }
 }
