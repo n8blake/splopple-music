@@ -41,8 +41,8 @@ module.exports = {
             spotifyPlaylistId: "",
             tracks: prunedTracks
         }
-        // const matchedTracks = await spotifyAPIController.fetchTracks(prunedTracks);
-
-        response.json(playlistStub);
+        const matchedTracks = await spotifyAPIController.fetchTracks(prunedTracks);
+        console.log(matchedTracks)
+        // response.json(matchedTracks);
     }
 }

@@ -4,7 +4,7 @@ const spotifyAPIController = require("../../api_controllers/spotifyAPIController
 // Match with '/api/spotify'
 router.route("/")
     //.get(bookController.findAll)
-    .post(spotifyAPIController.fetch);
+    .post(spotifyAPIController.fetchTracks);
 
 // Matches with '/api/spotify/:id'
 // Is this even useful?
