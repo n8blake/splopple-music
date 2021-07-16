@@ -19,6 +19,13 @@ export default {
     querySpotifyURI: function(URI){ 
         //console.log(`Getting ${queryString}`)
         const spotifyEndPoint = '/api/Spotify/';
-        return axios.post(spotifyEndPoint, URI);
+        const testEndPoint = '/api/test/';
+        const request = {
+            playlist_uri: URI
+        }
+        if(process.env.NODE_ENV === "production"){
+            return axios.post(spotifyEndPoint, URI);
+        } 
+        return axios.post(testEndPoint, request);
     }
 };
