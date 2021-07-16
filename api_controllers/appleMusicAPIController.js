@@ -7,12 +7,6 @@ module.exports = {
     fetchPlaylist: async function(request, response) {
         // the request will be a POST request from
         // the front end containing a playlist_uri
-        // field that should kick of the cycle
-        // i.e. :
-        // const incomingPlaylistURI = request.body.playlist_uri;
-        // 
-        // pass playlist URI to apple API
-        // return the result... ?
 
         const incomingPlaylistURI = request.body.playlist_uri.split('/').pop();
 
@@ -24,6 +18,9 @@ module.exports = {
             return res.data;
         }).catch(err => console.log(err));
 
+        if (playlistResponse.errors) {
+            response.status(404).send("Playlist not found");
+        }
         let tracks = playlistResponse.data[0].relationships.tracks.data;
         let prunedTracks = [];
         for (let i = 0; i < tracks.length; i++) {
