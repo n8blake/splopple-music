@@ -2,7 +2,7 @@ const express = require("express");
 const session = require('express-session');
 const path = require("path");
 const compression = require('compression');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const routes = require("./routes");
 const app = express();
 

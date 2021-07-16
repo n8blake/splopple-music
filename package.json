@@ -30,6 +30,7 @@
     "mongoose": "^5.13.2",
     "mysql2": "^2.2.5",
     "sass": "^1.35.1",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "spotify-web-api-node": "^5.0.2"
   }
 }
