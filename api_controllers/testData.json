@@ -1,5 +1,5 @@
 {
-  "appleMusicPlaylistURI":"https://music.apple.com/us/playlist/songs-of-our-generation/pl.u-m4PPtYmxm9",
+  "appleMusicPlaylistURI":"https://music.apple.com/us/playlist/test-list/pl.u-Var9fjKvKx",
   "spotifyPlaylistURI":"https://open.spotify.com/playlist/1p1m03Ogf3XHorhDkBYS1b?si=65d3fde0b4484347",
   "tracks":[
   {
@@ -9,7 +9,8 @@
     "album": "Bad Romance Single",
     "images" : [
       {
-        "dimension": "64",
+        "dimension":
+         "64",
         "url": "https://upload.wikimedia.org/wikipedia/en/c/cc/Lady_Gaga_-_Bad_Romance.png"
       }
     ],
