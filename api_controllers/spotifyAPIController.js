@@ -10,7 +10,7 @@ module.exports = {
         
     },
 
-    getTracks(newTrack){
+    fetchTracks(newTrack){
         
         const refresh= process.env.REFRESH_TOKEN
         const spotifyAPI= new SpotifyWebApi({
@@ -48,6 +48,7 @@ module.exports = {
                     })
                 })
             } 
+            
         })
     }
 }
