@@ -2,19 +2,13 @@ const SpotifyWebApi = require('spotify-web-api-node')
 
 
 module.exports = { 
-    constructor(){
-        this.token;
-        this.token_type;
-        this.trackArr=[];
-        this.playlistId
-        this.playlist.url;
-        
-    },
+    
 
     fetchTracks: async function (newTrack){
         let tracks=[]
         let playlistId=''
         let done= false
+        let playlistUrl=''
         
         const refresh= process.env.REFRESH_TOKEN
         const spotifyAPI= new SpotifyWebApi({
@@ -26,16 +20,15 @@ module.exports = {
         const getData= new Promise((resolve, rej)=>{
         spotifyAPI.refreshAccessToken()
         .then((data)=>{
-            
-            this.token=data.body.access_token
-            this.token_type=data.body.token_type
             token=data.body.token_type
             spotifyAPI.setAccessToken(data.body.access_token)
 
-            spotifyAPI.createPlaylist('T9', {'description': 'Insert Description', 'public': true})
+            spotifyAPI.createPlaylist('Name', {'description': 'Insert Description', 'public': true})
                     .then((data)=>{
                         console.log('Playlist Created')
+                        console.log(data)
                         playlistId= data.body.id
+                        playlistUrl=data.body.external_urls.spotify
                         
                             const makePlaylist=async()=>{
 
@@ -63,7 +56,9 @@ module.exports = {
                                                         artist: newTrack[i].artists[0],
                                                         trackName:dataSet[0].name,
                                                         spotifyId: dataSet[0].id,
-                                                        images: dataSet[0].album.images
+                                                        images: dataSet[0].album.images,
+                                                        url: playlistUrl
+                                                        
                                                     }
                                                 
                                                     tracks.push(track)
