@@ -12,8 +12,8 @@ module.exports = {
         let incomingPlaylistURI = "";
         const splitUrl = request.body.playlist_uri.split('/');
         for (let i = splitUrl.length - 1; i > 0; i--) {
-            if (splitStr[i] !== '') {
-                incomingPlaylistURI = splitStr[i];
+            if (splitUrl[i] !== '') {
+                incomingPlaylistURI = splitUrl[i];
                 break;
             }
         }
@@ -24,7 +24,10 @@ module.exports = {
             }
         }).then(res => {
             return res.data;
-        }).catch(err => console.log(err));
+        }).catch((err) => {
+            response.status(404).json(err);
+            return;
+        });
 
         if (playlistResponse.errors) {
             response.status(404).send("Playlist not found");
@@ -44,6 +47,8 @@ module.exports = {
         let playlistStub = {
             applePlaylistURL: request.body.playlist_uri,
             spotifyPlaylistURL: "",
+            playlistName: playlistResponse.data[0].attributes.name,
+            playlistDesc: playlistResponse.data[0].attributes.description.standard,
             tracks: prunedTracks
         }
         let internalPlaylist = await spotifyAPIController.fetchTracks(playlistStub);
