@@ -10,11 +10,12 @@ export default {
         const request = {
             playlist_uri: URI
         }
-        //console.log(request);
-        if(process.env.NODE_ENV === "production"){
-            return axios.post(appleMusicEndPoint, request);
-        } 
-        return axios.post(testEndPoint, request);
+        console.log(request);
+        // if(process.env.NODE_ENV === "production"){
+        //     return axios.post(appleMusicEndPoint, request);
+        // } 
+        // return axios.post(testEndPoint, request);
+        return axios.post(appleMusicEndPoint, request);
     },
     querySpotifyURI: function(URI){ 
         //console.log(`Getting ${queryString}`)

@@ -8,6 +8,7 @@ module.exports = {
         // the request will be a POST request from
         // the front end containing a playlist_uri
 
+        console.log(request.body);
         const incomingPlaylistURI = request.body.playlist_uri.split('/').pop();
 
         let playlistResponse = await axios.get(`${playlistApi}${incomingPlaylistURI}`, {
