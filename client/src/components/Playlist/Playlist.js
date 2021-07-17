@@ -20,6 +20,7 @@ export default function Playlist() {
 
     const queryAppleMusic = () => {
         setPlaylistSource('apple');
+        //console.log(debouncedInputURI);
 
         dispatch({
             type: QUERY_APPLE_URI,
@@ -27,12 +28,13 @@ export default function Playlist() {
         });
 
         //console.log(`Starting search...`);
-        API.queryAppleMusicURI(state.inputURI)
+        //console.log(state.inputURI);
+        API.queryAppleMusicURI(debouncedInputURI)
             .then(results => {
                 //console.log("Queried!");
                 //console.log(results.status);
                 if(results.data){
-                    //console.log(results.data);
+                    console.log(results.data);
                     dispatch({
                         type: UPDATE_LIST_RESULTS,
                         results: results.data
@@ -86,6 +88,7 @@ export default function Playlist() {
             const spotifyURLPrefix = 'https://open.spotify.com/playlist/';
             //console.log(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0);
             // is it Apple Music or Spotify?
+            console.log(debouncedInputURI);
             if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0){
                 queryAppleMusic();
             } else if(debouncedInputURI.indexOf(spotifyURLPrefix) === 0){
@@ -102,17 +105,17 @@ export default function Playlist() {
             
             <InputURI playlistSource={playlistSource} onChange={handleInputChange} />
             {
-                (state.inputListResults && state.inputListResults.spotifyPlaylistURI && (playlistSource !== 'spotify')) ? 
+                (state.inputListResults && state.inputListResults.spotifyPlaylistURL && (playlistSource !== 'spotify')) ? 
                 ( 
-                    <a href={state.inputListResults.spotifyPlaylistURI} target="_blank" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
+                    <a href={state.inputListResults.spotifyPlaylistURL} target="_blank" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
                 ) : (
                     <span></span>
                 )
             }
             {
-                (state.inputListResults && state.inputListResults.appleMusicPlaylistURI && (playlistSource !== 'apple')) ? 
+                (state.inputListResults && state.inputListResults.appleMusicPlaylistURL && (playlistSource !== 'apple')) ? 
                 ( 
-                    <a href={state.inputListResults.appleMusicPlaylistURI} target="_blank" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
+                    <a href={state.inputListResults.appleMusicPlaylistURL} target="_blank" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
                 ) : (
                     <span></span>
                 )
