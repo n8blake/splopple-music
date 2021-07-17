@@ -11,6 +11,7 @@ export default function Playlist() {
 
     const [state, dispatch] = useStoreContext();
     const [listURI, setListURI] = useState("");
+    const [playlistError, setPlaylistError] = useState(false);
     const [playlistSource, setPlaylistSource] = useState("");
     const debouncedInputURI = useDebounce(listURI, 500);
 
@@ -32,7 +33,7 @@ export default function Playlist() {
         API.queryAppleMusicURI(debouncedInputURI)
             .then(results => {
                 //console.log("Queried!");
-                //console.log(results.status);
+                console.log(results.status);
                 if(results.data){
                     console.log(results.data);
                     dispatch({
@@ -40,6 +41,10 @@ export default function Playlist() {
                         results: results.data
                     });
                 }
+            })
+            .catch(error => {
+                setPlaylistError(true);
+                console.log(error);
             });
     }
 
@@ -63,6 +68,10 @@ export default function Playlist() {
                         results: results.data
                     });
                 }
+            })
+            .catch(error => {
+                setPlaylistError(true);
+                console.log(error);
             });
     }
 
@@ -107,7 +116,7 @@ export default function Playlist() {
             {
                 (state.inputListResults && state.inputListResults.spotifyPlaylistURL && (playlistSource !== 'spotify')) ? 
                 ( 
-                    <a href={state.inputListResults.spotifyPlaylistURL} target="_blank" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
+                    <a href={state.inputListResults.spotifyPlaylistURL} target="_blank" rel="noopener" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
                 ) : (
                     <span></span>
                 )
@@ -115,7 +124,7 @@ export default function Playlist() {
             {
                 (state.inputListResults && state.inputListResults.appleMusicPlaylistURL && (playlistSource !== 'apple')) ? 
                 ( 
-                    <a href={state.inputListResults.appleMusicPlaylistURL} target="_blank" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
+                    <a href={state.inputListResults.appleMusicPlaylistURL} target="_blank" rel="noopener" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
                 ) : (
                     <span></span>
                 )
@@ -129,7 +138,11 @@ export default function Playlist() {
                             )
                         })
                     ) : (
-                        <i className="text-muted no-results">Enter an Apple Music or Spotify playlist URL.</i>  
+                        playlistError ? ( 
+                            <i className="text-danger no-results">URL provided was not recognized by the server. Please enter a valid playlist URL.</i>
+                        ) : (
+                            <i className="text-muted no-results">Enter an Apple Music or Spotify playlist URL.</i>  
+                        )
                     )
                 }
             </ul>
