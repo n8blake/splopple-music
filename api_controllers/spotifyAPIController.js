@@ -14,7 +14,7 @@ module.exports = {
         
         const refresh= process.env.REFRESH_TOKEN
         const spotifyAPI= new SpotifyWebApi({
-            redirectUri: 'http://localhost:3000/',
+            redirectUri: process.env.spotifyRedirectURI,
             clientId: process.env.SP_CI,
             clientSecret:process.env.SP_CS
         })
