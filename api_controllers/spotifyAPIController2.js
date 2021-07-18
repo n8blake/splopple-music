@@ -1,4 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node')
+const appleMusicAPIController2 = require("./appleMusicAPIController2")
 
 module.exports = {
     fetchPlaylist: async function (req, res) {
@@ -11,7 +12,7 @@ module.exports = {
         const playlistName = incomingURL.pathname.split('/').pop()
         console.log("::PlaylistName:: " + playlistName)
 
-        const refresh= process.env.REFRESH_TOKEN
+        const refresh = process.env.REFRESH_TOKEN
         const spotifyApi = new SpotifyWebApi({
             redirectUri: process.env.spotifyRedirectURI,
             clientId: process.env.SP_CI,
@@ -19,18 +20,26 @@ module.exports = {
         });
 
         spotifyApi.setRefreshToken(refresh)
-        
-        const accessTokenResponse = await spotifyApi.refreshAccessToken()        
-        spotifyApi.setAccessToken(accessTokenResponse.body.access_token)        
 
-        const playlistDetails = await spotifyApi.getPlaylist(playlistName)
-        const tracksURL = playlistDetails.body.tracks.href
-        console.log("::TRACKS URL:: " + tracksURL)
+        const accessTokenResponse = await spotifyApi.refreshAccessToken()
+        spotifyApi.setAccessToken(accessTokenResponse.body.access_token)
+
+        const playlistDetails = await spotifyApi.getPlaylist(playlistName)                
 
         const tracksResponse = await spotifyApi.getPlaylistTracks(playlistName)
+        const trackISRCs = tracksResponse.body.items.map(item => {
+            return item.track.external_ids.isrc
+        })
 
-        console.log(tracksResponse)
+        const playlistData = {
+            'Name': playlistDetails.body.name,
+            'TracksByISRC': trackISRCs
+        }
 
-        return res.send(tracksResponse)
+        console.log(playlistData)
+
+        appleMusicAPIController2.createPlaylist(playlistData)
+
+        return res.send(playlistData)
     }
 }
