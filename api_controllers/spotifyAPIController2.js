@@ -38,8 +38,7 @@ module.exports = {
 
         console.log(playlistData)
 
-        appleMusicAPIController2.createPlaylist(playlistData)
-
-        return res.send(playlistData)
+        const createResponse = await appleMusicAPIController2.createPlaylist(playlistData)
+        return res.status(createResponse.status).send(createResponse.data.data)
     }
 }
