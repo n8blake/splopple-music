@@ -36,6 +36,42 @@ module.exports = {
                             const makePlaylist=async()=>{
 
                                 for (let i=0;i<=internalTracks.length;i++){
+                                                                        
+                                    const noParseTrack=internalTracks[i].trackName;
+                                    const noParseArt=internalTracks[i].artists[0]
+                                    const paresTrack=noParseTrack.replace(/'/g, '',/&/g, '	%26' )
+                                    const paresArt=noParseArt.replace(/'/g, '',/&/g, '	%26' )
+                                    const data=await spotifyAPI.searchTracks(`track:${paresTrack} artist: ${paresArt}`)
+                                    const dataSet=data.body.tracks.items;   
+                                    
+                                        if(!dataSet[0]){
+                                            
+                                            console.log('Fail:'+ i)
+                                            internalPlaylist.tracks[i].errorMatch= true;
+                                            internalPlaylist.tracks[i].images = [{url: "https://via.placeholder.com/150?text=Track+Not+Found"}];
+                                        }
+                                        else{
+                                            
+                                            internalPlaylist.tracks[i].spotifyTrackId = dataSet[0].id;
+                                            internalPlaylist.tracks[i].images = dataSet[0].album.images;
+                                            const track={
+                                                artist: internalTracks[i].artists[0],
+                                                trackName:dataSet[0].name,
+                                                spotifyId: dataSet[0].id,
+                                                images: dataSet[0].album.images,
+                                                errorMatch: false
+                                                
+                                            }
+                                        
+                                            spotifyAPI.addTracksToPlaylist(playlistId, [`spotify:track:${track.spotifyId}`])
+                                            .then((data)=>{
+                                                console.log(i)
+                                                console.log(`track ${track.trackName}added`)
+                                                
+                                            })
+                                        }
+                                    console.log(i);
+
                                     if(i===internalTracks.length-1){
                                         console.log(true)
                                         
@@ -60,44 +96,6 @@ module.exports = {
                                         resolve(internalPlaylist)
                                         return(internalPlaylist)
                                     }
-                                    
-                                    const noParseTrack=internalTracks[i].trackName;
-                                    const noParseArt=internalTracks[i].artists[0]
-                                    const paresTrack=noParseTrack.replace(/'/g, '',/&/g, '	%26' )
-                                    const paresArt=noParseArt.replace(/'/g, '',/&/g, '	%26' )
-                                    const data=await spotifyAPI.searchTracks(`track:${paresTrack} artist: ${paresArt}`)
-                                    const dataSet=data.body.tracks.items;   
-                                    
-                                        if(!dataSet[0]){
-                                            
-                                            console.log('Fail:'+ i)
-                                            internalPlaylist.errorMatch= true
-                                            
-                                        }
-                                        else{
-                                            
-                                            internalPlaylist.tracks[i].spotifyTrackId = dataSet[0].id;
-                                            internalPlaylist.tracks[i].images = dataSet[0].album.images;
-                                            const track={
-                                                artist: internalTracks[i].artists[0],
-                                                trackName:dataSet[0].name,
-                                                spotifyId: dataSet[0].id,
-                                                images: dataSet[0].album.images,
-                                                url: playlistUrl,
-                                                errorMatch: false
-                                                
-                                            }
-                                        
-                                           
-                                            
-                                            spotifyAPI.addTracksToPlaylist(playlistId, [`spotify:track:${track.spotifyId}`])
-                                            .then((data)=>{
-                                                console.log(i)
-                                                console.log(`track ${track.trackName}added`)
-                                                
-                                            })
-                                        }
-                                    console.log(i)
                                  
                                 } 
                             }
