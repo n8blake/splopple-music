@@ -29,5 +29,39 @@ module.exports = {
 
         console.log("::AppleTrackIDs::")
         console.log(appleTrackIDs)
+
+        const formattedAppleTrackIDs = appleTrackIDs.map(item => {
+            return {
+                id: `${item}`,
+                type: "songs"
+            }
+        })
+
+        // Apple music playlist create request body
+        const playlistCreateRequest = {
+            "attributes": {
+                "name": `${playListName}`,
+                "description": `${playListName}`
+            },
+            "relationships": {
+                "tracks": {
+                    "data": formattedAppleTrackIDs
+                }
+            }
+        }
+
+        console.log("::REQUEST BODY::")
+        console.log(JSON.stringify(playlistCreateRequest))
+        console.log(formattedAppleTrackIDs)
+
+        const playlistCreateURL = "https://api.music.apple.com/v1/me/library/playlists"
+        const createResponse = await axios.post(
+            playlistCreateURL,
+            JSON.stringify(playlistCreateRequest),
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.APPLE_MUSIC_API_TOKEN}`
+                }
+            })
     }
 }
