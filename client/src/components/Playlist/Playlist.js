@@ -40,11 +40,19 @@ export default function Playlist() {
                         type: UPDATE_LIST_RESULTS,
                         results: results.data
                     });
+                    dispatch({
+                        type: LOADING,
+                        loading: false
+                    });
                 }
             })
             .catch(error => {
                 setPlaylistError(true);
                 console.log(error);
+                dispatch({
+                    type: LOADING,
+                    loading: false
+                });
             });
     }
 
@@ -57,7 +65,7 @@ export default function Playlist() {
         });
 
         //console.log(`Starting search...`);
-        API.querySpotifyURI(state.inputURI)
+        API.querySpotifyURI(debouncedInputURI)
             .then(results => {
                 //console.log("Queried!");
                 //console.log(results.status);
@@ -67,11 +75,19 @@ export default function Playlist() {
                         type: UPDATE_LIST_RESULTS,
                         results: results.data
                     });
+                    dispatch({
+                        type: LOADING,
+                        loading: false
+                    });
                 }
             })
             .catch(error => {
                 setPlaylistError(true);
                 console.log(error);
+                dispatch({
+                    type: LOADING,
+                    loading: false
+                });
             });
     }
 
@@ -98,6 +114,10 @@ export default function Playlist() {
             //console.log(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0);
             // is it Apple Music or Spotify?
             console.log(debouncedInputURI);
+            dispatch({
+                type: LOADING,
+                loading: true
+            });
             if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0){
                 queryAppleMusic();
             } else if(debouncedInputURI.indexOf(spotifyURLPrefix) === 0){

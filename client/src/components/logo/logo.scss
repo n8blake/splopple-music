@@ -1,8 +1,100 @@
 /*impor theme colors*/
 @import '../../theme-colors.scss';
 
+.logo-spinning-container{
+    width: 64pt;
+    height: 64pt;
+    margin-top: 20pt;
+    position: relative;
+}
+
 .logo-default {
     width: 64pt;
     height: 64pt;
-    margin: 20pt;
+    margin-top: 20pt;
+}
+
+.logo-spinning-bg {
+    width: 64pt;
+    height: 64pt;
+    animation: spin 2s linear 0s infinite reverse;
+}
+
+.music-note-container {
+    width: 24pt;
+    height: 24pt;
+    /*border: solid 1pt black;*/
+    position: absolute;
+    text-align: left;
+    transform: translateY(-44pt) translateX(20pt);
+    
+}
+
+.music-note-spinning {
+    width: 22pt;
+    height: 22pt;
+    position: absolute;
+    animation: music-note-orbit 2s linear 0s infinite reverse;
+}
+
+.sound-lines-container {
+    width: 24pt;
+    height: 24pt;
+    /*border: solid 1pt black;*/
+    position: absolute;
+    text-align: left;
+    transform: translateY(-44pt) translateX(20pt);
+    
+}
+
+.sound-lines-spinning {
+    width: 22pt;
+    height: 22pt;
+    position: absolute;
+    animation: sound-lines-orbit 2s linear 0s infinite reverse;
+}
+
+
+@keyframes music-note-orbit {
+    from { 
+        transform: rotate(0deg) 
+        translateX(-16pt)
+        rotate(0deg); 
+    }
+    to   { 
+        transform: rotate(360deg) 
+        translateX(-16pt)
+        rotate(-360deg); 
+    }
+}
+
+@keyframes sound-lines-orbit {
+    from { 
+        transform: rotate(0deg) 
+        translateX(16pt)
+        rotate(0deg); 
+    }
+    to   { 
+        transform: rotate(360deg) 
+        translateX(16pt)
+        rotate(-360deg); 
+    }
+}
+
+@keyframes spin {
+    0% {
+        rotate: 0deg;
+    }
+    25%{
+        rotate: 90deg;
+    }
+    50%{
+        rotate: 180deg;
+    }
+    75% {
+        rotate: 270deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
 }
