@@ -5,10 +5,11 @@ const spotifyAPIController2 = require("../../api_controllers/spotifyAPIControlle
 // Match with '/api/spotify'
 router.route("/")
     //.get(bookController.findAll)
-    .post(spotifyAPIController.fetchTracks);
-
-router.route("/fetchPlaylist")
+    //.post(spotifyAPIController.fetchTracks);
     .post(spotifyAPIController2.fetchPlaylist);
+
+// router.route("/fetchPlaylist")
+//     .post(spotifyAPIController2.fetchPlaylist);
     
 
 // Matches with '/api/spotify/:id'
