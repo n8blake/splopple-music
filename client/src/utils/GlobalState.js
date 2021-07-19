@@ -28,7 +28,7 @@ const reducer = (state, action) => {
         case LOADING: 
             return {
                 ...state,
-                loading: true
+                loading: action.loading
             }
         case LOGIN: 
             return {
