@@ -24,9 +24,10 @@ export default {
         const request = {
             playlist_uri: URI
         }
-        if(process.env.NODE_ENV === "production"){
-            return axios.post(spotifyEndPoint, URI);
-        } 
-        return axios.post(testEndPoint, request);
+        console.log(request);
+        // if(process.env.NODE_ENV === "production"){
+        //     return axios.post(spotifyEndPoint, URI);
+        // } 
+        return axios.post(spotifyEndPoint, request);
     }
 };
