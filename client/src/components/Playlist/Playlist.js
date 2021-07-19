@@ -70,7 +70,7 @@ export default function Playlist() {
                 //console.log("Queried!");
                 //console.log(results.status);
                 if(results.data){
-                    //console.log(results.data);
+                    console.log(results.data);
                     dispatch({
                         type: UPDATE_LIST_RESULTS,
                         results: results.data
@@ -103,6 +103,7 @@ export default function Playlist() {
                 searchResults: state.inputListResults
             });
             setPlaylistSource('');
+            setPlaylistError(false);
             return;
         }
 
@@ -110,6 +111,7 @@ export default function Playlist() {
             
             // "validate" URI here...
             const appleMusicURLPrefix = 'https://music.apple.com/us/playlist/';
+            const appleMusicLibraryURLPrefix = 'https://music.apple.com/library/playlist/';
             const spotifyURLPrefix = 'https://open.spotify.com/playlist/';
             //console.log(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0);
             // is it Apple Music or Spotify?
@@ -118,11 +120,17 @@ export default function Playlist() {
                 type: LOADING,
                 loading: true
             });
-            if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0){
+            if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0 || 
+            debouncedInputURI.indexOf(appleMusicLibraryURLPrefix)){
                 queryAppleMusic();
             } else if(debouncedInputURI.indexOf(spotifyURLPrefix) === 0){
                 querySpotify();
             } else {
+                dispatch({
+                    type: LOADING,
+                    loading: false
+                });
+                setPlaylistError(true);
                 return;
             }
 
@@ -133,10 +141,26 @@ export default function Playlist() {
         <div className="container playlist-container">
             
             <InputURI playlistSource={playlistSource} onChange={handleInputChange} />
+            <div className="">
+            {
+                (state.inputListResults && state.inputListResults.playlistName) ? (
+                    <h3><i className="bi bi-music-note-list"></i> {state.inputListResults.playlistName}</h3>
+                ) : (
+                    <div></div>
+                )
+            }
+            {
+                (state.inputListResults && state.inputListResults.playlistDesc) ? (
+                    <p>{state.inputListResults.playlistDesc}</p>
+                ) : (
+                    <div></div>
+                )
+            }
+            </div>
             {
                 (state.inputListResults && state.inputListResults.spotifyPlaylistURL && (playlistSource !== 'spotify')) ? 
                 ( 
-                    <a href={state.inputListResults.spotifyPlaylistURL} target="_blank" rel="noopener" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
+                    <a href={state.inputListResults.spotifyPlaylistURL} target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-outline-success destination-uri-button">Open In Spotify</a>
                 ) : (
                     <span></span>
                 )
@@ -144,11 +168,12 @@ export default function Playlist() {
             {
                 (state.inputListResults && state.inputListResults.appleMusicPlaylistURL && (playlistSource !== 'apple')) ? 
                 ( 
-                    <a href={state.inputListResults.appleMusicPlaylistURL} target="_blank" rel="noopener" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
+                    <a href={state.inputListResults.appleMusicPlaylistURL} target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-outline-info destination-uri-button">Open In Apple Music</a>
                 ) : (
                     <span></span>
                 )
             }
+            
             <ul className="list-group playlist">
                 {
                     (state.inputListResults && state.inputListResults.tracks) ? (
