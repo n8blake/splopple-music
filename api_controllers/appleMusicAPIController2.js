@@ -68,6 +68,10 @@ module.exports = {
 
         const createResponse = await axios.post( playlistCreateURL, payload, {headers: headers})        
         console.log(createResponse)
+
+        const playlistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`        
+        console.log("::Playlist url:: " + playlistUrl.toString())
+
         return createResponse
     }
 }
