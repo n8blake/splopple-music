@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-module.exports = {
+module.exports = {   
     createPlaylist: async function (playlistData) {
         const playListName = playlistData.Name
 
@@ -20,15 +20,15 @@ module.exports = {
                 }
             })
 
-            console.log("::RESPONSE::")
-            console.log(response.data.data)
+            // console.log("::RESPONSE::")
+            // console.log(response.data.data)
 
             const appleTrackID = response.data.data[0].id
             appleTrackIDs.push(appleTrackID)
         }
 
-        console.log("::AppleTrackIDs::")
-        console.log(appleTrackIDs)
+        // console.log("::AppleTrackIDs::")
+        // console.log(appleTrackIDs)
 
         const formattedAppleTrackIDs = appleTrackIDs.map(item => {
             return {
@@ -50,18 +50,28 @@ module.exports = {
             }
         }
 
-        console.log("::REQUEST BODY::")
-        console.log(JSON.stringify(playlistCreateRequest))
-        console.log(formattedAppleTrackIDs)
+        // console.log("::REQUEST BODY::")
+        // console.log(JSON.stringify(playlistCreateRequest))
+        // console.log(formattedAppleTrackIDs)
 
         const playlistCreateURL = "https://api.music.apple.com/v1/me/library/playlists"
-        const createResponse = await axios.post(
-            playlistCreateURL,
-            JSON.stringify(playlistCreateRequest),
-            {
-                headers: {
-                    Authorization: `Bearer ${process.env.APPLE_MUSIC_API_TOKEN}`
-                }
-            })
+        const payload = JSON.stringify(playlistCreateRequest)
+        const headers = {
+            Authorization: `Bearer ${process.env.APPLE_MUSIC_API_TOKEN}`,
+            "Music-User-Token": `${process.env.APPLE_MUSIC_API_USER_TOKEN}`
+        }
+
+        //console.log("::CREATE REQUEST::")
+        // console.log(playlistCreateURL)
+        // console.log(payload)
+        // console.log(headers)
+
+        const createResponse = await axios.post( playlistCreateURL, payload, {headers: headers})        
+        console.log(createResponse)
+
+        const playlistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`        
+        console.log("::Playlist url:: " + playlistUrl.toString())
+
+        return createResponse
     }
 }
