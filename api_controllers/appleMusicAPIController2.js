@@ -1,18 +1,20 @@
 const axios = require('axios')
+const { restart } = require('nodemon')
 
-module.exports = {   
-    createPlaylist: async function (playlistData) {
-        const playListName = playlistData.Name
+module.exports = {
+    createPlaylist: async function (workingData) {
+        const applePlaylistName = workingData.playlistName
 
-        const appleTrackIDs = []
+        const appleTrackIds = []
         // get apple track id for each ISRC
         // NOTE: it is possible to get multiple track Id for every ISRC
         //       in such case we will pick the first track. 
         //       (Need to figure out better logic in future)
-        for (let i = 0; i < playlistData.TracksByISRC.length; i++) {
-            const ISRC = playlistData.TracksByISRC[i]
+        for (let i = 0; i < workingData.tracks.length; i++) {
+            const currentItem = workingData.tracks[i]
+            const ISRC = currentItem.isrc
             const queryUrl = `https://api.music.apple.com/v1/catalog/us/songs?filter[isrc]=${ISRC}`
-            console.log("::QUERY URL::" + queryUrl)
+            // console.log("::QUERY URL::" + queryUrl)
 
             const response = await axios.get(queryUrl, {
                 headers: {
@@ -22,26 +24,39 @@ module.exports = {
 
             // console.log("::RESPONSE::")
             // console.log(response.data.data)
-
-            const appleTrackID = response.data.data[0].id
-            appleTrackIDs.push(appleTrackID)
+            if (response.data != null && response.data.data != null && response.data.data.length > 0) {
+                const appleTrackId = response.data.data[0].id
+                currentItem.appleTrackId = appleTrackId
+                // console.log("::CURRENT TRACK::")
+                // console.log(currentItem)
+            } else {
+                currentItem.errorMatch = true
+                console.log(`No record found for ISRC ${ISRC}`)
+            }
         }
 
         // console.log("::AppleTrackIDs::")
         // console.log(appleTrackIDs)
 
-        const formattedAppleTrackIDs = appleTrackIDs.map(item => {
-            return {
-                id: `${item}`,
-                type: "songs"
-            }
-        })
+        const formattedAppleTrackIDs = workingData.tracks
+            .filter(item => {
+                if (item.errorMatch === true) {
+                    return false
+                }
+                return true
+            })
+            .map(item => {
+                return {
+                    id: `${item.appleTrackId}`,
+                    type: 'song'
+                }
+            })
 
         // Apple music playlist create request body
         const playlistCreateRequest = {
             "attributes": {
-                "name": `${playListName}`,
-                "description": `${playListName}`
+                "name": `${applePlaylistName}`,
+                "description": `${applePlaylistName}`
             },
             "relationships": {
                 "tracks": {
@@ -50,9 +65,9 @@ module.exports = {
             }
         }
 
-        // console.log("::REQUEST BODY::")
-        // console.log(JSON.stringify(playlistCreateRequest))
-        // console.log(formattedAppleTrackIDs)
+        console.log("::REQUEST BODY - APPLE CREATE::")
+        console.log(JSON.stringify(playlistCreateRequest))
+        console.log(formattedAppleTrackIDs)        
 
         const playlistCreateURL = "https://api.music.apple.com/v1/me/library/playlists"
         const payload = JSON.stringify(playlistCreateRequest)
@@ -66,10 +81,12 @@ module.exports = {
         // console.log(payload)
         // console.log(headers)
 
-        const createResponse = await axios.post( playlistCreateURL, payload, {headers: headers})        
+        const createResponse = await axios.post(playlistCreateURL, payload, { headers: headers })
+
         console.log(createResponse)
 
-        const playlistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`        
+        const playlistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`
+        //workingData.ap
         console.log("::Playlist url:: " + playlistUrl.toString())
 
         return createResponse
