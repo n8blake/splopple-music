@@ -16,7 +16,7 @@ A web app for giving the people what they want: Spotify and Apple Music Harmony.
     <li>Insert an Apple or Spotify playlist url.</li>
     <li>A new playlist of the other music service will be crated</li>
     <li>Tracks will be added to the playlist. The user will see each track that has been added. Any tracks that fail will notify the user. </li>
-    <li>The user will also get a button that will redirect them to the new playlist on the music service</li>
+    <li>The user will also get a button that will redirect them to the new playlist on the music service </li>
 </ol>
 
 ## User-Story
