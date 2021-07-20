@@ -1,3 +1,4 @@
+const { INSERT } = require('sequelize/types/lib/query-types')
 const SpotifyWebApi = require('spotify-web-api-node')
 const appleMusicAPIController2 = require("./appleMusicAPIController2")
 //const {Playlist} = require("../models")
@@ -68,11 +69,17 @@ module.exports = {
         console.log(workingData)                
 
         const createResponse = await appleMusicAPIController2.createPlaylist(workingData)
-        const applePlaylistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`
-        console.log("::Playlist url:: " + applePlaylistUrl.toString());
+        if(createResponse.status === 201){
+            // insert record in internal database
+            const recordToInsert = {
+                apple_music_playlist_uri: workingData.appleMusicPlaylistURI,
+                spotify_playlist_uri: workingData.spotifyPlaylistURI
+            }
 
-        workingData.appleMusicPlaylistURI = applePlaylistUrl
+            // insert in database
+           
+        }
 
-        return res.status(createResponse.status).send(createResponse.data.data)
+        return res.status(createResponse.status).send(workingData)
     }
 }
