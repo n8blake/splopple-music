@@ -1,33 +1,40 @@
 /* Change theme colors here... */
-/*$theme-colors:(
-	"primary": #0074d9,
-	"secondary":#A58E5D,
-	"danger":#ff4136,
-	"warning":#DD8D00,
-	"success":#65BA7D,
-	"info":#BFD7DD,
-	"dark":#4f3f1e
-);*/
+$red : #EB3337;
+$pink: #F81F74;
+$orange: #EA8B34;
+$yellow: #F7D821;
+$green: #39B54A;
+$light-green: #8CC63F;
+$teal: #39B29E;
+$blue: #0A92EF;
+$dark-blue: #0E5075;
+$purple: #7E11B7;
+$brown : #998675;
+$dark-brown : #736357;
+$light-brown : #C7B299;
+$latte : #EFE3D5;
 
-/* Change other colors here if needed */
-/*
-$colors: (
-  "blue": $blue,
-  "indigo": $indigo,
-  "purple": $purple,
-  "pink": $pink,
-  "red": $red,
-  "orange": $orange,
-  "yellow": $yellow,
-  "green": $green,
-  "teal": $teal,
-  "cyan": $cyan,
-  "white": $white,
-  "gray": $gray-600,
-  "gray-dark": $gray-800
-) !default;
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
 
-*/
+$primary:       $blue;
+$secondary:     $dark-blue;
+$success:       $light-green;
+$info:          $pink;
+$warning:       $orange;
+$danger:        $red;
+$light:         $gray-300;
+$dark:          $gray-900;
+
 @function tint($color, $percentage) {
     @return mix(white, $color, $percentage);
 }

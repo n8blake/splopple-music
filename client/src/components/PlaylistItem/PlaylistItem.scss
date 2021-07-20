@@ -1,0 +1,35 @@
+@import '../../theme-colors.scss';
+
+.playlist-item {
+    padding: 0pt;
+}
+
+.album-art {
+    width: 64pt;
+    height: 64pt;
+    margin: 10pt 0pt 10pt 10pt;
+    background-color: $gray-700;
+    border-radius: 4pt;
+}
+
+.track-data {
+    padding: 10pt;
+}
+
+.artist {
+    color: $gray-700;
+    padding-right: 6pt;
+    font-weight: 300;
+}
+
+.error-message {
+    font-size: 10pt;
+    font-style: italic;
+    color: $warning;
+}
+
+.success-message {
+    font-size: 10pt;
+    font-style: italic;
+    color: $success;
+}

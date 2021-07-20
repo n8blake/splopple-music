@@ -1,0 +1,17 @@
+.logoSpot {
+    background-image: url('spot-logo.svg');
+    width: 50pt;
+    height: 50pt;
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    animation: animatedBackground 4s linear infinite alternate;
+}
+
+@keyframes animatedBackground {
+    0% {
+        width: 50pt;
+    }
+    100% {
+        width: 0pt;
+    }
+}

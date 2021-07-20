@@ -1,3 +1,4 @@
 node_modules
-brainstorming
 .DS_Store
+.env
+build/
