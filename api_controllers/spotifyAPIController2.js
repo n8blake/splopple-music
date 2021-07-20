@@ -1,4 +1,3 @@
-const { INSERT } = require('sequelize/types/lib/query-types')
 const SpotifyWebApi = require('spotify-web-api-node')
 const appleMusicAPIController2 = require("./appleMusicAPIController2")
 //const {Playlist} = require("../models")
