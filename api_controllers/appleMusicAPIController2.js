@@ -1,5 +1,4 @@
 const axios = require('axios')
-const { restart } = require('nodemon')
 
 module.exports = {
     createPlaylist: async function (workingData) {
