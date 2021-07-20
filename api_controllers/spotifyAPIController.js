@@ -26,7 +26,7 @@ module.exports = {
             token=data.body.token_type
             spotifyAPI.setAccessToken(data.body.access_token)
 
-            spotifyAPI.createPlaylist('Name', {'description': 'Insert Description', 'public': true})
+            spotifyAPI.createPlaylist(internalPlaylist.playlistName, {'description': internalPlaylist.playlistDesc, 'public': true})
                     .then((data)=>{
                         console.log('Playlist Created')
                         // console.log(data)
