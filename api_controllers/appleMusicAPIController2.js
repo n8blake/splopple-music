@@ -86,8 +86,10 @@ module.exports = {
         console.log(createResponse)
 
         const playlistUrl = `https://music.apple.com/library/playlist/${createResponse.data.data[0].id}`
-        //workingData.ap
-        console.log("::Playlist url:: " + playlistUrl.toString())
+        workingData.appleMusicPlaylistURI = playlistUrl    
+        
+        console.log("::DEBUG:: Apple playlist created")
+        console.log(workingData)
 
         return createResponse
     }
