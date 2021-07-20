@@ -121,7 +121,7 @@ export default function Playlist() {
                 loading: true
             });
             if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0 || 
-            debouncedInputURI.indexOf(appleMusicLibraryURLPrefix)){
+            debouncedInputURI.indexOf(appleMusicLibraryURLPrefix) === 0){
                 queryAppleMusic();
             } else if(debouncedInputURI.indexOf(spotifyURLPrefix) === 0){
                 querySpotify();
