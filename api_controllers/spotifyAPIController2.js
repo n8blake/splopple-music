@@ -1,3 +1,4 @@
+//const { INSERT } = require('sequelize/types/lib/query-types')
 const SpotifyWebApi = require('spotify-web-api-node')
 const appleMusicAPIController2 = require("./appleMusicAPIController2")
 //const {Playlist} = require("../models")
@@ -13,6 +14,7 @@ module.exports = {
             appleMusicPlaylistURI: '',
             spotifyPlaylistURI: '',
             playlistName: '',
+            playlistDesc: '',
             tracks: []
         }
 
@@ -38,11 +40,12 @@ module.exports = {
         const accessTokenResponse = await spotifyApi.refreshAccessToken()
         spotifyApi.setAccessToken(accessTokenResponse.body.access_token)
 
-        const playlistDetails = await spotifyApi.getPlaylist(spotifyPlaylistId)
+        const playlistDetails = await spotifyApi.getPlaylist(spotifyPlaylistId)        
 
         // TODO: handle error
         //       It is possible that no playlist is found. 
-        workingData.playlistName = playlistDetails.body.name        
+        workingData.playlistName = playlistDetails.body.name
+        workingData.playlistDesc = playlistDetails.body.description
 
         const trackDetails = await spotifyApi.getPlaylistTracks(spotifyPlaylistId)
         for(let i=0; i<trackDetails.body.items.length; i++ ){
@@ -64,8 +67,8 @@ module.exports = {
             workingData.tracks.push(currentTrackDetail)
         }
         
-        console.log("::DEBUG:: WorkingData")
-        console.log(workingData)                
+        // console.log("::DEBUG:: WorkingData")
+        // console.log(workingData)        
 
         const createResponse = await appleMusicAPIController2.createPlaylist(workingData)
         if(createResponse.status === 201){
