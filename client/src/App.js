@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.scss";
 import Header from './components/Header/Header';
 import Playlist from './components/Playlist/Playlist';

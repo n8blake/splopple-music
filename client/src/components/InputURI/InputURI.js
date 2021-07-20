@@ -5,7 +5,7 @@ import './InputURI.scss';
 function InputURI(props) {
 
     const [inputWrapperClass, setInputWrapperClass] = useState('');
-    const [state, dispatch] = useStoreContext();
+    //const [state, dispatch] = useStoreContext();
 
     useEffect(() => {
 
