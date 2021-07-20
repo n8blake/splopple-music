@@ -121,10 +121,16 @@ export default function Playlist() {
                 loading: true
             });
             if(debouncedInputURI.indexOf(appleMusicURLPrefix) === 0 || 
-            debouncedInputURI.indexOf(appleMusicLibraryURLPrefix)){
+            debouncedInputURI.indexOf(appleMusicLibraryURLPrefix) === 0){
+                // 
+                console.log(`index of appleMusicURLPrefix: ${debouncedInputURI.indexOf(appleMusicURLPrefix)}; index of appleMusicLibraryURLPrefix: ${debouncedInputURI.indexOf(appleMusicLibraryURLPrefix)}`);
+                // 
                 queryAppleMusic();
             } else if(debouncedInputURI.indexOf(spotifyURLPrefix) === 0){
                 querySpotify();
+                // 
+                console.log("querying Spotify route");
+                // 
             } else {
                 dispatch({
                     type: LOADING,
