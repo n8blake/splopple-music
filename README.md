@@ -21,7 +21,7 @@ A web app for giving the people what they want: Spotify and Apple Music Harmony.
 
 ## User-Story
  As a user, I want to be able to convert a playlist from Apply Music into Spotify, or convert a playlist from Spotify into Apple Music. Then I can share the newly created playlist url with others.
-
+![SpoppleMusic App](Assets/SpoppleMusicApp.gif)
 ## Credits
 <ul>
   <li>
