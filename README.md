@@ -2,16 +2,16 @@
 A web app for giving the people what they want: Spotify and Apple Music Harmony. 
 
 ## Table of Contents
--[How-To-Use](#How-To-Use)
--[User Story](#User-Story)
--[Credits](#credits)
--[Front End Technologies](#Front-End-Technologies)
--[Back End Technologies](#Back-End-Technologies)
--[Feedback](#Feedback)
+- [How-To-Use](#How-To-Use)
+- [User Story](#User-Story)
+- [Credits](#credits)
+- [Front End Technologies](#Front-End-Technologies)
+- [Back End Technologies](#Back-End-Technologies)
+- [Feedback](#Feedback)
 
 ## How-To-Use
    <ol>
-    <li>Go to the deployed app on<a href="https://splopple-music.herokuapp.com/">Heroku</a></li>
+    <li>Go to the deployed app on <a href="https://splopple-music.herokuapp.com/">Heroku</a></li>
     <li>On page load, the user will be prompted with a search bar </li>
     <li>Insert an Apple or Spotify playlist url.</li>
     <li>A new playlist of the other music service will be crated</li>
